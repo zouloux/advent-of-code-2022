@@ -1,8 +1,11 @@
+/**
+ * Day 1 - 🌟🌟
+ * https://adventofcode.com/2022/day/1
+ */
+
+// ----------------------------------------------------------------------------- INPUT
+
 import { readFile } from "fs/promises"
-
-// https://adventofcode.com/2022/day/1
-// https://adventofcode.com/2022/day/1/input
-
 const input = await readFile('./input.txt', { encoding: "utf8" })
 
 // ----------------------------------------------------------------------------- PART 1
@@ -21,12 +24,15 @@ const biggerElf = elves.reduce(
 	(p, c) => c > p ? c : p, 0
 )
 
-console.log(`Part 1 : ${biggerElf}`) // 🌟
+// 🌟
+console.log(`Part 1 : ${biggerElf}`)
 
 // ----------------------------------------------------------------------------- PART 2
 
+// Sort elves by size, get first 3 only and add them together
 const sortedElves = elves.sort( (a, b) => a > b ? -1 : +1 )
 const topThreeElves = sortedElves.slice( 0, 3 )
 const totalTopThreeElves = topThreeElves.reduce( (p, c) => p + c, 0 )
 
+// 🌟
 console.log(`Part 2 : ${totalTopThreeElves}`)
