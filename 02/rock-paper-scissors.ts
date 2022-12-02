@@ -57,3 +57,44 @@ export function computeRPSTotalForRounds ( rounds:TRPSRounds ) {
 		return p + roundScore
 	}, 0)
 }
+
+
+
+export function computeRPSTotalForCodedRound ( rounds:TRPSRounds ) {
+	return rounds.reduce( (p, round) => {
+		const [ shape1, code ] = round
+
+		// Lose
+		let shape2
+		if ( code === "X" ) {
+			shape2 = (
+				shape1 === "A" ? "Z"
+				: shape1 === "B" ? "X"
+				: shape1 === "C" ? "Y" : null
+			)
+		}
+		// Draw
+		else if ( code === "Y" ) {
+			shape2 = (
+				shape1 === "A" ? "X"
+				: shape1 === "B" ? "Y"
+				: shape1 === "C" ? "Z" : null
+			)
+		}
+		// Win
+		else if ( code === "Z") {
+			shape2 = (
+				shape1 === "A" ? "Y"
+				: shape1 === "B" ? "Z"
+				: shape1 === "C" ? "X" : null
+			)
+		}
+
+		const roundScore = computeRPSRoundScore( shape1, shape2 )
+		// console.log( shape1, code, shape2, roundScore );
+		return p + roundScore
+	}, 0)
+}
+
+
+

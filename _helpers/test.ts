@@ -1,10 +1,21 @@
 
 
+type IExpect = (a) => {
+	toBeExactly( b )
+}
 
-
-export function expect (a, b) {
-	if ( a !== b ) {
-		console.error(`Invalid ${a} should be ${b}`)
-		process.exit(1)
-	}
+/**
+ * Ultra compact test function.
+ * Will stop program if any test fails.
+ */
+export function should ( name:string, handler: (expect:IExpect) => void ) {
+	handler((a) => ({
+		toBeExactly ( b ) {
+			if ( a !== b ) {
+				console.error(`Test ${name} failed. ${a} should be ${b}`)
+				process.exit(1)
+			}
+		}
+	}))
+	console.log(`Test ${name} succeeded 👌`)
 }
